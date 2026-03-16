@@ -1,0 +1,1 @@
+export type Events = 'NEW_ORDER' | 'UPDATE_ORDER' | 'CANCEL_ORDER';
