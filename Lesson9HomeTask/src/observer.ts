@@ -46,22 +46,27 @@ class NewsAgency implements IAdmin {
     }
 }
 
-const agency = new NewsAgency;
+const agency = new NewsAgency();
 
 const myUsers = [
     new TelegramBotSubscriber('Платон'),
     new TelegramBotSubscriber('Полина'),
     new WebsiteSubscriber('Виолетта'),
+    new WebsiteSubscriber('Костя'),
 ]
 
-// ! убираю лишнюю заботу от TS
-// он говорит "Я ПРИНИМАЮ ВСЮ ОТВЕТСТВЕННОСТЬ НА СЕБЯ. Я ГАРАНТИРУЮ, ЧТО ТУТ НЕ ПУСТО!"
-agency.subscribe(myUsers[0]!); 
-agency.subscribe(myUsers[1]!);
-agency.subscribe(myUsers[2]!);
+for (const user of myUsers) {
+    agency.subscribe(user);
+}
 
 agency.publishNews('АААА ПРОГРАММИСТА НЕ НУЖНЫ ВСЕХ РОБОТЫ ЗАМЕНЯТ');
 
-agency.unsubscribe(myUsers[2]!);
+const usersToUnsubscribe = [ myUsers[2], myUsers[3] ];
+
+for (const user of usersToUnsubscribe) {
+    if (user) {
+        agency.unsubscribe(user);
+    }
+}
 
 agency.publishNews('ПРОВЕРОЧНАЯ НОВОСТЬ ПРИЙДЕТ ЛИ ЮЗЕРУ НОВОСТЬ ПОСЛЕ ОТПИСКИ');
